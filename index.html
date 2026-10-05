@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff0f6">
+  <title>Saniya ke liye 💖</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      color: #60374b;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(140deg, #fff5f7, #ffe5f0, #fff4e4);
+    }
+
+    .glow {
+      position: fixed;
+      z-index: 0;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: #ff9fc844;
+      filter: blur(55px);
+      pointer-events: none;
+      animation: glow 6s ease-in-out infinite alternate;
+    }
+
+    .glow.one { top: 5%; left: -80px; }
+    .glow.two { right: -80px; bottom: 5%; background: #ffd17444; }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(650px, 92%);
+      margin: auto;
+      padding: 26px 0 36px;
+      text-align: center;
+    }
+
+    .topline {
+      color: #bd4779;
+      font-size: .9rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+    }
+
+    .progress-wrap {
+      height: 8px;
+      margin: 16px 0 24px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #ffffffa8;
+    }
+
+    #progress {
+      width: 7.14%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #f36d9b, #b83c78);
+      transition: width .5s ease;
+    }
+
+    .card {
+      min-height: 490px;
+      padding: clamp(22px, 6vw, 42px);
+      border: 1px solid #fff;
+      border-radius: 30px;
+      background: #ffffffdc;
+      box-shadow: 0 18px 55px #a52d621c;
+      animation: enter .55s ease both;
+    }
+
+    .number {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 30px;
+      color: #a9366d;
+      background: #ffe5ef;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 12px 0;
+      color: #a9366d;
+      font-family: Georgia, serif;
+      font-size: clamp(2rem, 8vw, 3.3rem);
+    }
+
+    #message {
+      min-height: 88px;
+      margin: 12px auto;
+      color: #704d60;
+      font-size: clamp(1.05rem, 3.8vw, 1.25rem);
+      line-height: 1.8;
+    }
+
+    .teddy-scene {
+      position: relative;
+      display: grid;
+      height: 220px;
+      margin: 10px 0 18px;
+      place-items: center;
+      overflow: hidden;
+      border: 2px solid #f8d8e4;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% 105%, #ffe1ea, transparent 58%),
+        linear-gradient(135deg, #fff6f9, #fff9ec);
+      transition: background .5s ease;
+    }
+
+    .teddy {
+      position: relative;
+      z-index: 2;
+      font-size: 112px;
+      line-height: 1;
+      filter: drop-shadow(0 12px 8px #9c557333);
+      animation: teddyDance 1.8s ease-in-out infinite;
+      transform-origin: center bottom;
+      will-change: transform;
+    }
+
+    .teddy-heart {
+      position: absolute;
+      z-index: 3;
+      top: 74px;
+      left: calc(50% + 14px);
+      font-size: 32px;
+      animation: heartBeat .9s ease-in-out infinite;
+    }
+
+    .party {
+      position: absolute;
+      font-size: 25px;
+      animation: float 2.8s ease-in-out infinite;
+    }
+
+    .party.p1 { top: 24px; left: 12%; }
+    .party.p2 { top: 45px; right: 12%; animation-delay: .5s; }
+    .party.p3 { bottom: 25px; left: 22%; animation-delay: 1s; }
+    .party.p4 { right: 20%; bottom: 22px; animation-delay: .8s; }
+
+    .balloon {
+      position: absolute;
+      top: 33px;
+      width: 34px;
+      height: 44px;
+      border-radius: 50%;
+      opacity: .8;
+      animation: balloonFloat 3s ease-in-out infinite;
+    }
+
+    .balloon::after {
+      position: absolute;
+      top: 43px;
+      left: 17px;
+      width: 1px;
+      height: 58px;
+      background: #c999ad;
+      content: "";
+    }
+
+    .balloon.b1 { left: 5%; background: #f48caf; }
+    .balloon.b2 { right: 5%; background: #a9c9f5; animation-delay: .8s; }
+
+    /* Har birthday page par teddy ki alag animation */
+    .page-motion-1 .teddy  { animation: movePop 1.2s ease-in-out infinite; }
+    .page-motion-2 .teddy  { animation: moveSway 1.4s ease-in-out infinite; }
+    .page-motion-3 .teddy  { animation: moveHop 1s ease-in-out infinite; }
+    .page-motion-4 .teddy  { animation: moveSpin 2s ease-in-out infinite; }
+    .page-motion-5 .teddy  { animation: moveZoom 1.3s ease-in-out infinite; }
+    .page-motion-6 .teddy  { animation: moveDance .9s ease-in-out infinite; }
+    .page-motion-7 .teddy  { animation: moveFloat 1.8s ease-in-out infinite; }
+    .page-motion-8 .teddy  { animation: moveRock 1.3s ease-in-out infinite; }
+    .page-motion-9 .teddy  { animation: moveJump 1.1s ease-in-out infinite; }
+    .page-motion-10 .teddy { animation: movePulse 1.2s ease-in-out infinite; }
+    .page-motion-11 .teddy { animation: moveTwist 1s ease-in-out infinite; }
+    .page-motion-12 .teddy { animation: moveSlide 1.4s ease-in-out infinite; }
+    .page-motion-13 .teddy { animation: moveBounce 1s ease-in-out infinite; }
+    .page-motion-14 .teddy { animation: moveFinal 1.5s ease-in-out infinite; }
+
+    .page-motion-2  { background: linear-gradient(135deg, #fff0f6, #ffe3ed); }
+    .page-motion-3  { background: linear-gradient(135deg, #fff9e8, #ffe9d4); }
+    .page-motion-4  { background: linear-gradient(135deg, #f4f0ff, #ffe6f4); }
+    .page-motion-5  { background: linear-gradient(135deg, #eafff5, #fff2e7); }
+    .page-motion-6  { background: linear-gradient(135deg, #fff0f2, #f2eaff); }
+    .page-motion-7  { background: linear-gradient(135deg, #eaf8ff, #fff0f7); }
+    .page-motion-8  { background: linear-gradient(135deg, #fff7e6, #ffe8ef); }
+    .page-motion-9  { background: linear-gradient(135deg, #f0fff1, #fff4e7); }
+    .page-motion-10 { background: linear-gradient(135deg, #ffeaf3, #fff8dc); }
+    .page-motion-11 { background: linear-gradient(135deg, #f1edff, #ffeaf5); }
+    .page-motion-12 { background: linear-gradient(135deg, #e9fff8, #fff0e9); }
+    .page-motion-13 { background: linear-gradient(135deg, #fff0f4, #fff0d9); }
+    .page-motion-14 { background: linear-gradient(135deg, #ffe1ef, #fff0c9); }
+
+    .tools, .navigation {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 30px;
+      color: white;
+      background: linear-gradient(135deg, #ed6c9a, #bd3974);
+      box-shadow: 0 7px 18px #bd397433;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      transition: transform .2s;
+    }
+
+    button:hover:not(:disabled) { transform: translateY(-2px) scale(1.02); }
+
+    button:focus-visible {
+      outline: 3px solid #a9366d;
+      outline-offset: 3px;
+    }
+
+    button.secondary {
+      color: #a9366d;
+      background: #ffe5ef;
+      box-shadow: none;
+    }
+
+    button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .navigation { margin-top: 20px; }
+    .navigation button { min-width: 135px; }
+
+    .footer {
+      margin-top: 20px;
+      color: #9b7184;
+      font-size: .9rem;
+    }
+
+    .heart {
+      position: fixed;
+      z-index: 5;
+      bottom: -40px;
+      pointer-events: none;
+      animation: rise 4s linear forwards;
+    }
+
+    @keyframes enter {
+      from { opacity: 0; transform: translateY(18px) scale(.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes teddyDance {
+      0%, 100% { transform: translateY(4px) rotate(-5deg); }
+      50% { transform: translateY(-13px) rotate(5deg); }
+    }
+
+    @keyframes movePop {
+      0%, 100% { transform: scale(1) rotate(0); }
+      50% { transform: scale(1.22) rotate(8deg); }
+    }
+
+    @keyframes moveSway {
+      0%, 100% { transform: rotate(0); }
+      25% { transform: rotate(-16deg); }
+      75% { transform: rotate(16deg); }
+    }
+
+    @keyframes moveHop {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-23px); }
+    }
+
+    @keyframes moveSpin {
+      0%, 100% { transform: rotate(0) translateY(0); }
+      50% { transform: rotate(20deg) translateY(-8px); }
+    }
+
+    @keyframes moveZoom {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+    }
+
+    @keyframes moveDance {
+      0%, 100% { transform: rotate(0) translateY(0); }
+      25% { transform: rotate(-15deg) translateY(-7px); }
+      75% { transform: rotate(15deg) translateY(-7px); }
+    }
+
+    @keyframes moveFloat {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-20px) rotate(-7deg); }
+    }
+
+    @keyframes moveRock {
+      0%, 100% { transform: translateX(0) rotate(0); }
+      25% { transform: translateX(-13px) rotate(-10deg); }
+      75% { transform: translateX(13px) rotate(10deg); }
+    }
+
+    @keyframes moveJump {
+      0%, 100% { transform: translateY(0) scale(1); }
+      40%, 60% { transform: translateY(-25px) scale(1.08); }
+    }
+
+    @keyframes movePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes moveTwist {
+      0%, 100% { transform: rotate(0) translateY(0); }
+      25% { transform: rotate(18deg) translateY(-8px); }
+      75% { transform: rotate(-18deg) translateY(-8px); }
+    }
+
+    @keyframes moveSlide {
+      0%, 100% { transform: translateX(0) rotate(0); }
+      30% { transform: translateX(14px) rotate(9deg); }
+      70% { transform: translateX(-14px) rotate(-9deg); }
+    }
+
+    @keyframes moveBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      25%, 75% { transform: translateY(-18px); }
+      50% { transform: translateY(0) scale(1.12, .9); }
+    }
+
+    @keyframes moveFinal {
+      0%, 100% { transform: scale(1) rotate(0); }
+      25% { transform: scale(1.15) rotate(-10deg); }
+      50% { transform: scale(1.25) rotate(10deg); }
+      75% { transform: scale(1.15) rotate(-10deg); }
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-8deg); }
+      50% { transform: translateY(-12px) rotate(8deg); }
+    }
+
+    @keyframes balloonFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    @keyframes glow {
+      from { transform: scale(.8); opacity: .55; }
+      to { transform: scale(1.2); opacity: 1; }
+    }
+
+    @keyframes rise {
+      to { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+    }
+
+    @media (max-width: 420px) {
+      .tools button { padding: 10px 13px; font-size: .9rem; }
+      .teddy-scene { height: 195px; }
+      .teddy { font-size: 95px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow one" aria-hidden="true"></div>
+  <div class="glow two" aria-hidden="true"></div>
+
+  <main>
+    <div class="topline">Saniya meri jaan • 14 October 🎂</div>
+
+    <div class="progress-wrap" aria-label="Safar ki progress">
+      <div id="progress"></div>
+    </div>
+
+    <section class="card" id="card" aria-live="polite">
+      <div class="number" id="pageNumber"></div>
+
+      <div
+        class="teddy-scene page-motion-1"
+        id="teddyScene"
+        aria-label="Naachta hua birthday teddy"
+      >
+        <span class="balloon b1" aria-hidden="true"></span>
+        <span class="balloon b2" aria-hidden="true"></span>
+        <span class="party p1" aria-hidden="true">✨</span>
+        <span class="party p2" aria-hidden="true">🎈</span>
+        <span class="party p3" aria-hidden="true">🌸</span>
+        <span class="party p4" aria-hidden="true">✨</span>
+        <div class="teddy" aria-hidden="true">🧸</div>
+        <div class="teddy-heart" aria-hidden="true">💖</div>
+      </div>
+
+      <h1 id="title"></h1>
+      <p id="message"></p>
+
+      <div class="tools">
+        <button class="secondary" id="musicButton" type="button">
+          Birthday song chalao 🎵
+        </button>
+      </div>
+    </section>
+
+    <div class="navigation">
+      <button class="secondary" id="backButton" type="button">← Peeche</button>
+      <button id="nextButton" type="button">Aage chalo 💖</button>
+    </div>
+
+    <div class="footer">Har page sirf tumhare liye, meri Ammo 💕</div>
+  </main>
+
+  <script>
+    const pages = [
+      ["Meri Saniya", "Aaj ka yeh chhota sa surprise sirf meri sabse khaas ladki ke liye hai. Happy Birthday, Ammo! 💖"],
+      ["Tumhari muskaan", "Tumhari ek muskaan mera poora din khoobsurat bana deti hai. Aise hi hamesha hansti rehna, meri jaan. 😊"],
+      ["Meri favourite", "Duniya mein bahut khoobsurat cheezein hain, par meri favourite cheez tum ho, Saniya. 🌷"],
+      ["Tum aur main", "Tum saath ho toh har aam din bhi kisi celebration jaisa lagta hai. Shukriya meri zindagi mein aane ke liye. 🫶"],
+      ["Dil ki baat", "Tumhari care, tumhara pyaar aur tumhari baatein mere dil ke bahut kareeb hain. Tum mere liye bahut special ho. 💌"],
+      ["Chhoti si shayari", "Teri hansi se roshan meri shaam rahe, teri khushi se khoobsurat har mukaam rahe. Saniya, tera har din tere naam rahe. ✨"],
+      ["Meri dua", "Meri dua hai tumhare har sapne ko pankh milein, har din khushiyon se bhara ho aur tum hamesha khush raho. 🤲"],
+      ["Meri Ammo", "Ammo, tumhara pyaara sa naam sunte hi chehre par smile aa jaati hai. Tum meri sabse pyaari si aadat ho. 🧸"],
+      ["Saath ke pal", "Tumhare saath bitaya har pal mere liye ek pyaari yaad hai. Aage bhi hum dher saari yaadein banayein. 💞"],
+      ["Tum par fakhr", "Tum jitni pyaari ho, utni hi strong aur special bhi ho. Hamesha apne dil ki sunna aur apne sapne poore karna. 🌟"],
+      ["Janamdin ki khushi", "Aaj cake, gifts aur dher saara pyaar tumhare naam! Tum duniya ki saari khushiyon ki haqdar ho. 🎁"],
+      ["Ek waada", "Main koshish karunga ki tumhari zindagi mein hamesha pyaar, izzat aur khushiyan laa sakun. Tum hamesha muskurati raho. 💗"],
+      ["Meri chhoti si chitthi", "Saniya, tum meri zindagi ka bahut khoobsurat hissa ho. Tumse bahut pyaar hai, meri jaan. Aaj aur har roz. 💖"],
+      ["Happy Birthday, Ammo!", "Happy Birthday meri pyaari Saniya! Tumhara aane wala saal pyaar, hansi aur khoobsurat surprises se bhara ho. Hamesha khush rehna! 🎉"]
+    ];
+
+    let current = 0;
+    let audioContext = null;
+    let musicPlaying = false;
+    let musicTimer = null;
+    let noteIndex = 0;
+    const activeOscillators = new Set();
+
+    const card = document.getElementById("card");
+    const musicButton = document.getElementById("musicButton");
+    const teddyScene = document.getElementById("teddyScene");
+
+    // Happy Birthday melody notes and their lengths in beats.
+    const birthdayAudio = new Audio("music.mp3");
+     birthdayAudio.loop = true;
+  birthdayAudio.preload = "auto";
+    
+    function renderPage() {
+      const [title, message] = pages[current];
+
+      teddyScene.className = `teddy-scene page-motion-${current + 1}`;
+      document.getElementById("pageNumber").textContent =
+        `Page ${current + 1} / ${pages.length}`;
+      document.getElementById("title").textContent = title;
+      document.getElementById("message").textContent = message;
+      document.getElementById("progress").style.width =
+        `${((current + 1) / pages.length) * 100}%`;
+
+      document.getElementById("backButton").disabled = current === 0;
+      document.getElementById("nextButton").textContent =
+        current === pages.length - 1 ? "Phir se dekho 💞" : "Aage chalo 💖";
+
+      card.style.animation = "none";
+      void card.offsetWidth;
+      card.style.animation = "enter .55s ease both";
+      
+    }
+musicButton.addEventListener("click", async () => {
+    if (birthdayAudio.paused) {
+      try {
+        await birthdayAudio.play();
+        musicButton.textContent = "Music roko ⏸️";
+      } catch {
+        musicButton.textContent = "music.mp3 nahi chala 😕";
+      }
+    } else {
+      birthdayAudio.pause();
+      musicButton.textContent = "Birthday song chalao 🎵";
+    }
+  });
+    function playNote(frequency, durationSeconds) {
+      const now = audioContext.currentTime;
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(frequency, now);
+
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.exponentialRampToValueAtTime(0.12, now + 0.04);
+      gain.gain.setValueAtTime(
+        0.12,
+        now + Math.max(0.05, durationSeconds - 0.08)
+      );
+      gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        now + durationSeconds
+      );
+
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+
+      activeOscillators.add(oscillator);
+      oscillator.onended = () => activeOscillators.delete(oscillator);
+
+      oscillator.start(now);
+      oscillator.stop(now + durationSeconds);
+    }
+
+    function playNextNote() {
+      if (!musicPlaying) return;
+
+      const [frequency, beats] = birthdayTune[noteIndex];
+      const secondsPerBeat = 0.38;
+      const duration = beats * secondsPerBeat;
+
+      playNote(frequency, duration);
+      noteIndex = (noteIndex + 1) % birthdayTune.length;
+      musicTimer = setTimeout(playNextNote, duration * 1000);
+    }
+
+    function stopMusic() {
+      musicPlaying = false;
+      clearTimeout(musicTimer);
+
+      for (const oscillator of activeOscillators) {
+        try {
+          oscillator.stop();
+        } catch {
+          // Oscillator already stopped.
+        }
+      }
+
+      activeOscillators.clear();
+      musicButton.textContent = "music play 🎵";
+    }
+
+    musicButton.addEventListener("click", async () => {
+      if (musicPlaying) {
+        stopMusic();
+        return;
+      }
+
+      try {
+        const AudioContextClass =
+          window.AudioContext || window.webkitAudioContext;
+
+        if (!AudioContextClass) {
+          musicButton.textContent = "Browser music support nahi karta";
+          return;
+        }
+
+        if (!audioContext) audioContext = new AudioContextClass();
+        await audioContext.resume();
+
+        musicPlaying = true;
+        noteIndex = 0;
+        musicButton.textContent = "music pause ⏸️";
+        playNextNote();
+      } catch {
+        musicButton.textContent = "Music nahi chala 😕";
+      }
+    });
+
+    document.getElementById("nextButton").addEventListener("click", () => {
+      current = current === pages.length - 1 ? 0 : current + 1;
+      renderPage();
+      showHearts();
+    });
+
+    document.getElementById("backButton").addEventListener("click", () => {
+      if (current > 0) current--;
+      renderPage();
+    });
+
+    function showHearts() {
+      for (let i = 0; i < 8; i++) {
+        const heart = document.createElement("span");
+        heart.className = "heart";
+        heart.textContent = ["💖", "💕", "✨", "💗"][
+          Math.floor(Math.random() * 4)
+        ];
+        heart.style.left = `${Math.random() * 95}vw`;
+        heart.style.fontSize = `${18 + Math.random() * 22}px`;
+        heart.style.animationDuration = `${3 + Math.random() * 2}s`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5200);
+      }
+    }
+
+    renderPage();
+    showHearts();
+  </script>
+</body>
+</html>
